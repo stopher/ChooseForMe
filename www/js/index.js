@@ -76,6 +76,7 @@ var app = {
     	$(".button").on("click", function() {
 
             $('.button').transition({ y: '3000px', duration: 2000 });
+            //$('.header').transition({ y: '-300px', duration: 500 });
             $('.preloader').transition({ opacity: 1 });
 
             setTimeout(function() {
@@ -89,7 +90,7 @@ var app = {
                     $(".output").html("Do it!");
                     $("body").addClass("positive");
                     $("body").removeClass("negative");
-                }                    
+                }
             }, 3000);
     	});
     }

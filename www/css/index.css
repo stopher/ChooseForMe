@@ -120,14 +120,13 @@ h1 {
 
 .button {
     position: absolute;
-	width: 180px;
+	width: 280px;
 	height: 50px;
 	background: #FFDC00;
     color: #111111;
     font-size: 40px;
     padding: 30px;
-    font-family: 'Chewy', cursive; 
-    
+    font-family: 'Chewy', cursive;     
     top: 80px;
     left:0;
     right:0;
@@ -253,4 +252,9 @@ h1 {
     margin-left:auto;
     margin-right:auto;    
     z-index: 2;
+}
+
+.info {
+    font-family: 'Lato';
+    font-size: 12px;
 }
