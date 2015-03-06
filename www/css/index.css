@@ -1,4 +1,4 @@
-/*
+    /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -45,6 +45,8 @@ body {
         color-stop(0, #203f5f),
         color-stop(0.51, #001f3f)
     );
+    background:radial-gradient(circle, #6d8aa5, #303d49 );
+
     background-attachment:fixed;
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size:12px;
@@ -52,25 +54,18 @@ body {
     margin:0px;
     padding:0px;
     text-transform:uppercase;
-    width:100%;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
 
 /* Portrait layout (default) */
 .app {
-    margin: auto;
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-    text-align:center;
-    width: 320px;
+    margin: auto;        
+    text-align:center;    
+    width: 100%;
+    height: 100%;
 }
 
-/* Landscape layout (with min-width) */
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    .app {
-
-    }
-}
 
 h1 {
     font-size:24px;
@@ -120,20 +115,22 @@ h1 {
 
 .button {
     position: absolute;
-	width: 280px;
+	width: 260px;
 	height: 50px;
-	background: #FFDC00;
+	background: #EDEDED;
     color: #111111;
     font-size: 40px;
     padding: 30px;
     font-family: 'Chewy', cursive;     
-    top: 80px;
     left:0;
     right:0;
     margin-left:auto;
     margin-right:auto;  
     z-index: 4;      
     cursor: default;
+    opacity: 0;
+    position: relative;
+
 }
 
 .header {
@@ -147,21 +144,22 @@ h1 {
     margin-left:auto;
     margin-right:auto;       
     cursor: default;
+    opacity: 0;
 }
 
 .output {
     position: absolute;
-	font-size: 40px;
+	font-size: 50px;
 	font-family: 'Chewy', sans-serif;
     padding: 40px;
     opacity: 0;
-    top: 50px;
     left:0;
     right:0;
     margin-left:auto;
     margin-right:auto;        
     z-index: 3;
     cursor: default;
+    opacity: 0;
 }
 
 .positive {
@@ -192,61 +190,16 @@ h1 {
     );    
 }
 
-
-#preloader_4{
-    position:relative;
-    width: 100px;
-    margin: 0px auto;
-    height: 50px;
-    padding-top: 20px;
-}
-#preloader_4 span{
-    left: 0px;
-    position:absolute;
-    width:20px;
-    height:20px;
-    background:#67989A;
-    opacity:0.5;
-    border-radius:20px;
-    -animation: preloader_4 1s infinite ease-in-out;
-    -webkit-animation: preloader_4 1s infinite ease-in-out;
- 
-}
-#preloader_4 span:nth-child(2){
-    left:20px;
-    animation-delay: .2s;
-    -webkit-animation-delay: .2s;
-}
-#preloader_4 span:nth-child(3){
-    left:40px;
-    animation-delay: .4s;
-    -webkit-animation-delay: .4s;
-}
-#preloader_4 span:nth-child(4){
-    left:60px;
-    animation-delay: .6s;
-    -webkit-animation-delay: .6s;
-}
-#preloader_4 span:nth-child(5){
-    left:80px;
-     animation-delay: .6s;
-    -webkit-animation-delay: .8s;
-}
-@keyframes preloader_4 {
-    0% {opacity: 0.3; transform:translateY(0px);    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);}
-    50% {opacity: 1; transform: translateY(-10px); background:#0074D9;  box-shadow: 0px 20px 3px rgba(0, 0, 0, 0.05);}
-    100%  {opacity: 0.3; transform:translateY(0px); box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);}
-}
-@-webkit-keyframes preloader_4 {
-    0% {opacity: 0.3; transform:translateY(0px);    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);}
-    50% {opacity: 1; transform: translateY(-10px); background:#0074D9;  box-shadow: 0px 20px 3px rgba(0, 0, 0, 0.05);}
-    100%  {opacity: 0.3; transform:translateY(0px); box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);}
+.middle {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);   
+    position: absolute;
 }
 
 .preloader {
     opacity: 0;
-    position: absolute;
-    top: 80px;
     left:0;
     right:0;
     margin-left:auto;
@@ -257,4 +210,16 @@ h1 {
 .info {
     font-family: 'Lato';
     font-size: 12px;
+}
+
+.sprite-spinner {
+  overflow: hidden;
+  position: relative;
+  display:inline-block;
+  text-align:left;
+}
+
+.spinner-wrap {
+  text-align:center;
+  margin:100px auto;
 }

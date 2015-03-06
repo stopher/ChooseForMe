@@ -18,6 +18,40 @@
  */
 
 
+(function() {
+    SpriteSpinner = function(el, options){
+        var self = this,
+            img = el.children[0];
+        this.interval = options.interval || 10;
+        this.diameter = options.diameter || img.width;
+        this.count = 0;
+        this.el = el;
+        img.setAttribute("style", "position:absolute");
+        el.style.width = this.diameter+"px";
+        el.style.height = this.diameter+"px";
+        return this;
+    };
+    SpriteSpinner.prototype.start = function(){
+        var self = this,
+            count = 0,
+            img = this.el.children[0];
+        this.el.display = "block";
+        self.loop = setInterval(function(){
+            if(count == 19){
+                count = 0;
+            }
+            img.style.top = (-self.diameter*count)+"px";
+            count++;
+        }, this.interval);
+    };
+    SpriteSpinner.prototype.stop = function(){
+        clearInterval(this.loop);
+        this.el.style.display = "none";
+    };
+    document.SpriteSpinner = SpriteSpinner;
+})();
+
+
 function createEvent(nameOfCustomEvent) {
   
 
@@ -53,12 +87,14 @@ var app = {
     bindEvents: function() {
 
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener('resume', this.onDeviceResume, false);
+        document.addEventListener('pause', this.onDevicePause, false);
 
         var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
         if(is_chrome) {
-                    setTimeout(function() {
-                        createEvent('deviceready');
-                    },500);            
+            setTimeout(function() {
+                createEvent('deviceready');
+            },500);            
         }
 
     },
@@ -69,19 +105,42 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
     },
+    onDeviceResume: function() {
+        app.receivedEvent('resume');
+    },
+    onDevicePause: function() {
+        app.receivedEvent('pause');
+    },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
+
+        if(id === 'resume' || id === 'pause') {
+            app.resetApp();
+        }
+
+        if(id === 'deviceready') {
+            console.log(app);
+            console.log("..");
+            console.log(this);
+            app.initializeApp();
+        }
     
-    	$(".button").on("click", function() {
+    },
+    resetApp: function() {
+        $('.preloader').css("opacity","0");
+        $('.button').css("opacity","1");
+        $('.output').css("opacity","0");
+        $("body").removeClass("negative");
+        $("body").removeClass("positive");
+    },
+    initializeApp: function() {
 
-            $('.button').transition({ y: '3000px', duration: 2000 });
-            //$('.header').transition({ y: '-300px', duration: 500 });
-            $('.preloader').transition({ opacity: 1 });
+        $(".button").on("click", function() {
 
-            setTimeout(function() {
-                $('.preloader').transition({ opacity: 0 });
-                $('.output').transition({ opacity: 1 });
+            $('.button').transition({ opacity: 0, duration: 500 });            
+            $('.preloader').transition({ opacity: 1, duration: 3000 }, function() {
+                $('.preloader').transition({ opacity: 0, duration: 500 });
+                $('.output').transition({ opacity: 1, duration: 1000 });
                 if(decide() == 0) {
                     $(".output").html("Don't do it!")
                     $("body").addClass("negative");
@@ -90,8 +149,18 @@ var app = {
                     $(".output").html("Do it!");
                     $("body").addClass("positive");
                     $("body").removeClass("negative");
-                }
-            }, 3000);
-    	});
-    }
+                }                
+            });
+        });
+
+        $(".sprite-spinner").each(function(i){
+            var s = new SpriteSpinner(this, {
+                interval:50
+            });
+            s.start();
+        });
+        app.resetApp();
+
+        document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
+    },
 };
