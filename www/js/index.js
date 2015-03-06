@@ -121,8 +121,14 @@ var app = {
             $("body").removeClass("negative");
             $("body").removeClass("positive");
         }
+
+        if(id === 'deviceready') {
+            app.initializeApp();
+        }
     
-    	$(".button").on("click", function() {
+    },
+    intializeApp: function() {
+        $(".button").on("click", function() {
 
             $('.button').transition({ opacity: 0, duration: 500 });            
             $('.preloader').transition({ opacity: 1, duration: 1000 });
@@ -140,7 +146,7 @@ var app = {
                     $("body").removeClass("negative");
                 }
             }, 3000);
-    	});
+        });
 
         $(".sprite-spinner").each(function(i){
             var s = new SpriteSpinner(this, {
@@ -150,5 +156,5 @@ var app = {
         });
 
         document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
-    }
+    },
 };
