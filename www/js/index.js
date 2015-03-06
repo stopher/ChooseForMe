@@ -127,11 +127,11 @@ var app = {
     
     },
     resetApp: function() {
-            $('.preloader').transition({ opacity: 0 });
-            $('.button').transition({ opacity: 1 });            
-            $('.output').transition({ opacity: 0 });
-            $("body").removeClass("negative");
-            $("body").removeClass("positive");
+        $('.preloader').css("opacity","0");
+        $('.button')..css("opacity","1");
+        $('.output').css("opacity","0");
+        $("body").removeClass("negative");
+        $("body").removeClass("positive");
     },
     initializeApp: function() {
 
