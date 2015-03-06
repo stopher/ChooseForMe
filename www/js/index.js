@@ -115,27 +115,32 @@ var app = {
     receivedEvent: function(id) {
 
         if(id === 'resume' || id === 'pause') {
+            app.resetApp();
+        }
+
+        if(id === 'deviceready') {
+            console.log(app);
+            console.log("..");
+            console.log(this);
+            app.initializeApp();
+        }
+    
+    },
+    resetApp: function() {
             $('.preloader').transition({ opacity: 0 });
             $('.button').transition({ opacity: 1 });            
             $('.output').transition({ opacity: 0 });
             $("body").removeClass("negative");
             $("body").removeClass("positive");
-        }
-
-        if(id === 'deviceready') {
-            app.initializeApp();
-        }
-    
     },
-    intializeApp: function() {
+    initializeApp: function() {
+
         $(".button").on("click", function() {
 
             $('.button').transition({ opacity: 0, duration: 500 });            
-            $('.preloader').transition({ opacity: 1, duration: 1000 });
-
-            setTimeout(function() {
-                $('.preloader').transition({ opacity: 0 });
-                $('.output').transition({ opacity: 1 });
+            $('.preloader').transition({ opacity: 1, duration: 3000 }, function() {
+                $('.preloader').transition({ opacity: 0, duration: 500 });
+                $('.output').transition({ opacity: 1, duration: 1000 });
                 if(decide() == 0) {
                     $(".output").html("Don't do it!")
                     $("body").addClass("negative");
@@ -144,8 +149,8 @@ var app = {
                     $(".output").html("Do it!");
                     $("body").addClass("positive");
                     $("body").removeClass("negative");
-                }
-            }, 3000);
+                }                
+            });
         });
 
         $(".sprite-spinner").each(function(i){
@@ -154,6 +159,7 @@ var app = {
             });
             s.start();
         });
+        app.resetApp();
 
         document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
     },
