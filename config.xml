@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Choose for me</name>
+<widget id="no.olaussen.christopher.doordont" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Do or don't</name>
     <description>
-        Application that chooses for you
+        Application that helps you decide.
     </description>
     <author email="christopher.olaussen@gmail.com" >
         Christopher Olaussen
