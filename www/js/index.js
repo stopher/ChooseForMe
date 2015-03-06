@@ -18,6 +18,40 @@
  */
 
 
+(function() {
+    SpriteSpinner = function(el, options){
+        var self = this,
+            img = el.children[0];
+        this.interval = options.interval || 10;
+        this.diameter = options.diameter || img.width;
+        this.count = 0;
+        this.el = el;
+        img.setAttribute("style", "position:absolute");
+        el.style.width = this.diameter+"px";
+        el.style.height = this.diameter+"px";
+        return this;
+    };
+    SpriteSpinner.prototype.start = function(){
+        var self = this,
+            count = 0,
+            img = this.el.children[0];
+        this.el.display = "block";
+        self.loop = setInterval(function(){
+            if(count == 19){
+                count = 0;
+            }
+            img.style.top = (-self.diameter*count)+"px";
+            count++;
+        }, this.interval);
+    };
+    SpriteSpinner.prototype.stop = function(){
+        clearInterval(this.loop);
+        this.el.style.display = "none";
+    };
+    document.SpriteSpinner = SpriteSpinner;
+})();
+
+
 function createEvent(nameOfCustomEvent) {
   
 
@@ -53,6 +87,7 @@ var app = {
     bindEvents: function() {
 
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener('resume', this.onDeviceResume, false);
 
         var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
         if(is_chrome) {
@@ -69,15 +104,22 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
     },
+    onDeviceResume: function() {
+        app.receivedEvent('resume');
+    },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
+
+        if(id === 'resume') {
+            $('.preloader').transition({ opacity: 0 });
+            $('.button').transition({ opacity: 1 });            
+            $('.output').transition({ opacity: 0 });
+        }
     
     	$(".button").on("click", function() {
 
-            $('.button').transition({ y: '3000px', duration: 2000 });
-            //$('.header').transition({ y: '-300px', duration: 500 });
-            $('.preloader').transition({ opacity: 1 });
+            $('.button').transition({ opacity: 0, duration: 500 });            
+            $('.preloader').transition({ opacity: 1, duration: 1000 });
 
             setTimeout(function() {
                 $('.preloader').transition({ opacity: 0 });
@@ -93,5 +135,14 @@ var app = {
                 }
             }, 3000);
     	});
+
+        $(".sprite-spinner").each(function(i){
+            var s = new SpriteSpinner(this, {
+                interval:50
+            });
+            s.start();
+        });
+
+        document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
     }
 };
