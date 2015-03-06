@@ -128,7 +128,7 @@ var app = {
     },
     resetApp: function() {
         $('.preloader').css("opacity","0");
-        $('.button')..css("opacity","1");
+        $('.button').css("opacity","1");
         $('.output').css("opacity","0");
         $("body").removeClass("negative");
         $("body").removeClass("positive");
