@@ -88,12 +88,13 @@ var app = {
 
         document.addEventListener('deviceready', this.onDeviceReady, false);
         document.addEventListener('resume', this.onDeviceResume, false);
+        document.addEventListener('pause', this.onDevicePause, false);
 
         var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
         if(is_chrome) {
-                    setTimeout(function() {
-                        createEvent('deviceready');
-                    },500);            
+            setTimeout(function() {
+                createEvent('deviceready');
+            },500);            
         }
 
     },
@@ -107,13 +108,18 @@ var app = {
     onDeviceResume: function() {
         app.receivedEvent('resume');
     },
+    onDevicePause: function() {
+        app.receivedEvent('pause');
+    },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 
-        if(id === 'resume') {
+        if(id === 'resume' || id === 'pause') {
             $('.preloader').transition({ opacity: 0 });
             $('.button').transition({ opacity: 1 });            
             $('.output').transition({ opacity: 0 });
+            $("body").removeClass("negative");
+            $("body").removeClass("positive");
         }
     
     	$(".button").on("click", function() {
