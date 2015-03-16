@@ -134,6 +134,8 @@ var app = {
         $("body").removeClass("positive");
     },
     initializeApp: function() {
+        
+        Ads.init();
 
         $(".button").on("click", function() {
 
@@ -165,7 +167,8 @@ var app = {
         });
         app.resetApp();
 
-	FastClick.attach(document.body);
+	    FastClick.attach(document.body);
+        Ads.showBannerTop();
 
         if(/iP(hone|ad)/.test(window.navigator.userAgent)) {
             document.body.addEventListener('touchstart', function() {}, false);
