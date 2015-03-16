@@ -165,11 +165,7 @@ var app = {
         });
         app.resetApp();
 
-        if ('addEventListener' in document) {
-            document.addEventListener('DOMContentLoaded', function() {
-                FastClick.attach(document.body);
-            }, false);
-        }
+	FastClick.attach(document.body);
 
         if(/iP(hone|ad)/.test(window.navigator.userAgent)) {
             document.body.addEventListener('touchstart', function() {}, false);
