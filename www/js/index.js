@@ -168,7 +168,7 @@ var app = {
         app.resetApp();
 
 	    FastClick.attach(document.body);
-        Ads.showBannerTop();
+        Ads.showBannerBottom();
 
         if(/iP(hone|ad)/.test(window.navigator.userAgent)) {
             document.body.addEventListener('touchstart', function() {}, false);
