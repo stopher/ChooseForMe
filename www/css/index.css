@@ -68,12 +68,16 @@ body {
 
 
 h1 {
-    font-size:24px;
+    font-size:40px;
     font-weight:normal;
     margin:0px;
     overflow:visible;
     padding:0px;
     text-align:center;
+    font-family: 'Chewy', cursive;   
+    color: #fefefe;
+    text-shadow: 2px 2px 8px #302C2C;
+    padding-top: 60px;
 }
 
 .event {
@@ -222,4 +226,12 @@ h1 {
 .spinner-wrap {
   text-align:center;
   margin:100px auto;
+}
+
+.thinktext {
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+    color: #E8E8E8;
+    padding-top:40px;
+
 }

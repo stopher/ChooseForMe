@@ -137,7 +137,11 @@ var app = {
 
         $(".button").on("click", function() {
 
-            $('.button').transition({ opacity: 0, duration: 500 });            
+            $('.button').transition({ opacity: 0, duration: 500},function() {
+                $('.button').hide();
+            });            
+            $(".headertext").transition({ opacity: 0, y: -300, duration: 500});
+
             $('.preloader').transition({ opacity: 1, duration: 3000 }, function() {
                 $('.preloader').transition({ opacity: 0, duration: 500 });
                 $('.output').transition({ opacity: 1, duration: 1000 });
@@ -149,7 +153,7 @@ var app = {
                     $(".output").html("Do it!");
                     $("body").addClass("positive");
                     $("body").removeClass("negative");
-                }                
+                }
             });
         });
 
