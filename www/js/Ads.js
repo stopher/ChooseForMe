@@ -23,8 +23,8 @@ var Ads = (function() {
     
         if( /(android)/i.test(navigator.userAgent) ) { 
             admobid = { // for Android
-                banner: 'ca-app-pub-9885144648586728/4536230493',
-                interstitial: 'ca-app-pub-9885144648586728/6012963690'
+                banner: 'ca-app-pub-9885144648586728/3413934091',
+                interstitial: 'ca-app-pub-9885144648586728/4890667299'
             };
         } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
             admobid = { // for iOS
